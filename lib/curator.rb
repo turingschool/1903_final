@@ -1,3 +1,4 @@
+require 'csv'
 class Curator
   attr_reader :photographs, :artists
 
@@ -44,5 +45,32 @@ class Curator
         find_photographs_by_artist(artist)
       end
     end.compact
+  end
+
+  def load_photographs(file_path)
+    table = CSV.table(file_path)
+    table.each do |line|
+      info = {
+        id: line[:id],
+        name: line[:name],
+        artist_id: line[:artist_id],
+        year: line[:year]
+      }
+      photographs << Photograph.new(info)
+    end
+  end
+
+  def load_artists(file_path)
+    table = CSV.table(file_path)
+    table.each do |line|
+      info = {
+        id: line[:id],
+        name: line[:name],
+        born: line[:born],
+        died: line[:died],
+        country: line[:country]
+      }
+      artists << Artist.new(info)
+    end
   end
 end
