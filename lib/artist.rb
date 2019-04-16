@@ -7,10 +7,10 @@ class Artist
               :country
 
   def initialize(attributes)
-    @id = attributes[:id]
-    @name = attributes[:name]
-    @born = attributes[:born]
-    @died = attributes[:died]
-    @country = attributes[:country]
+    @id = attributes[:id].to_s
+    @name = attributes[:name].to_s
+    @born = attributes[:born].to_s
+    @died = attributes[:died].to_s
+    @country = attributes[:country].to_s
   end
 end

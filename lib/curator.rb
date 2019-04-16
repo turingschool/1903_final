@@ -19,6 +19,7 @@ class Curator
   end
 
   def find_artist_by_id(id)
+    # binding.pry
     @artists.find do |artist|
       artist.id == id
     end
@@ -71,15 +72,17 @@ class Curator
     CSV.foreach(file_path, headers: true, :header_converters => :symbol, :converters => :all) do |row|
       csv_artists[row.fields[0]] = Hash[row.headers[0..-1].zip(row.fields[0..-1])]
     end
-    csv_artists.each do |photo_id, attributes|
+    csv_artists.each do |artist_id, attributes|
       add_artist(Artist.new(attributes))
     end
+
   end
 
   def photographs_taken_between(range)
     @photographs.find_all do |photo|
       range.include?(photo.year)
     end.flatten
+    # binding.pry
   end
 
 

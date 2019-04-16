@@ -6,9 +6,9 @@ class Photograph
               :year
 
   def initialize(attributes)
-    @id = attributes[:id]
+    @id = attributes[:id].to_s
     @name = attributes[:name]
-    @artist_id = attributes[:artist_id]
+    @artist_id = attributes[:artist_id].to_s
     @year = attributes[:year]
   end
 end

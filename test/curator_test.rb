@@ -412,7 +412,20 @@ class CuratorTest < Minitest::Test
     expected = 1962
     actual = curator.photographs_taken_between(1950..1965)[1].year
     assert_equal expected, actual
+
   end
+
+  # def test_curator_can_find_artists_age_at_time_of_photo
+  #
+  #   curator = Curator.new
+  #   curator.load_photographs('./data/photographs.csv')
+  #   curator.load_artists('./data/artists.csv')
+  #   diane_arbus = find_artist_by_id("3")
+  #
+  #   expected = 2
+  #   actual = curator.artists_photographs_by_age(diane_arbus)
+  #   assert_equal expected, actual
+  # end
 
 
 end
