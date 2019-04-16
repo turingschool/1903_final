@@ -51,9 +51,9 @@ class Curator
     table = CSV.table(file_path)
     table.each do |line|
       info = {
-        id: line[:id],
+        id: line[:id].to_s,
         name: line[:name],
-        artist_id: line[:artist_id],
+        artist_id: line[:artist_id].to_s,
         year: line[:year]
       }
       photographs << Photograph.new(info)
@@ -64,11 +64,11 @@ class Curator
     table = CSV.table(file_path)
     table.each do |line|
       info = {
-        id: line[:id],
-        name: line[:name],
-        born: line[:born],
-        died: line[:died],
-        country: line[:country]
+        id: line[:id].to_s,
+        name: line[:name].to_s,
+        born: line[:born].to_s,
+        died: line[:died].to_s,
+        country: line[:country].to_s
       }
       artists << Artist.new(info)
     end
@@ -80,5 +80,15 @@ class Curator
         photo.year == year
       end
     end
+  end
+
+  def artists_photographs_by_age(artist)
+    photos = find_photographs_by_artist(artist)
+    hash = {}
+    photos.each do |photo|
+      age = photo.year - artist.born.to_i
+      hash[age] = photo.name
+    end
+    hash
   end
 end
