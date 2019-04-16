@@ -157,7 +157,6 @@ Use TDD to update your `Curator` class so that is supports the following methods
 
 The `Curator` class should now respond to the following interaction pattern:
 
-```ruby
 pry(main)> require './lib/photograph'
 # => true
 
