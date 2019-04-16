@@ -28,6 +28,12 @@ class Curator
   end
 
   def artists_with_multiple_photographs
+    multiple_photos = []
+    @artists.each do |artist|
+      multiple_photos << artist if \
+      @photographs.count{|photo| photo.artist_id == artist.id} > 1
+    end
+    multiple_photos
   end
 
   def photographs_taken_by_artist_from(country)
