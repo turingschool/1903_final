@@ -128,4 +128,33 @@ class CuratorTest < Minitest::Test
     assert_equal [], @curator.photographs_taken_by_artist_from("Argentina")
   end
 
+  def test_I_can_access_that_csv
+
+    assert_equal 4, @curator.load_photographs('./data/photographs.csv').length
+    assert_equal 6, @curator.load_artists('./data/artists.csv').length
+  end
+
+  def test_it_can_return_photos_from_range
+    @curator.load_photographs('./data/photographs.csv')
+    @curator.load_artists('./data/artists.csv')
+
+    assert_equal 2, @curator.photographs_taken_between(1950..1965).length
+  end
+
+  def test_find_artist_by_id
+    assert_equal "diane_arbus", @curator.find_artist_by_id("3")
+  end
+
+
+
+  # def test_it_can_find_artist_by_age
+  #   @curator.load_photographs('./data/photographs.csv')
+  #   @curator.load_artists('./data/artists.csv')
+  #
+  #   expected = {44=>"Identical Twins, Roselle, New Jersey", 39=>"Child with Toy Hand Grenade in Central Park"}
+  #   assert_equal expected, @curator.artists_photographs_by_age(@diane_arbus)
+  # end
+
+
+
 end
