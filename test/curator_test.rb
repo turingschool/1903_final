@@ -75,6 +75,6 @@ class CuratorTest < Minitest::Test
     @curator.add_artist(@henri)
     @curator.add_artist(@diane)
 
-    assert_empty [@diane], @curator.artists_with_multiple_photographs
+    assert_equal [@diane], @curator.artists_with_multiple_photographs
   end
 end
