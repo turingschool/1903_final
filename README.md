@@ -258,7 +258,7 @@ pry(main)> curator.photographs_taken_by_artist_from("Argentina")
 
 ### Iteration 4
 
-Use TDD to add the following methods to your `Curator` class:
+<!-- Use TDD to add the following methods to your `Curator` class:
 
 * `load_photographs(file)` - This method takes a path to a CSV file containing photographs and adds them to the `Curator`. You may find the included `FileIO` class useful.
 * `load_artists(file)` - This method takes a path to a CSV file containing artists and adds them to the `Curator`. You may find the included `FileIO` class useful.
@@ -282,4 +282,4 @@ pry(main)> diane_arbus = curator.find_artist_by_id("3")
 
 pry(main)> curator.artists_photographs_by_age(diane_arbus)
 => {44=>"Identical Twins, Roselle, New Jersey", 39=>"Child with Toy Hand Grenade in Central Park"}
-```
+``` -->
