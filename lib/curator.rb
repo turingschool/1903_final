@@ -7,6 +7,7 @@ class Curator
 
   def load_photos(file)
     lines = IO.readlines(file)
+    lines.shift
     lines.each do |line|
       words = line.chomp.split(/,/)
       photo = Photo.new({id: words[0], name: words[1], artist_id: words[2], \
@@ -17,6 +18,7 @@ class Curator
 
   def load_artists(file)
     lines = IO.readlines(file)
+    lines.shift
     lines.each do |line|
       words = line.chomp.split(/,/)
       artist = Artist.new({id: words[0], name: words[1], born: words[2], \
