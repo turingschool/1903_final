@@ -46,4 +46,12 @@ class Curator
     end
     photos_by_country
   end
+
+  def load_photographs(filepath)
+
+  end
+
+  def load_artists(filepath)
+
+  end
 end
