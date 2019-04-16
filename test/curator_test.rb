@@ -86,9 +86,8 @@ class CuratorTest < Minitest::Test
     assert_equal @photo_2, @curator.find_photograph_by_id("2")
   end
 
-  #not going to look now but does Minitest have a context do like rspec?
+  #I was unable to figure out how context can add instance variables while still holding variables created outside itself
 
-  
   def test_finds_artists_with_multiple_photographs
     @curator.add_artist(@artist_1)
     @curator.add_artist(@artist_2)
@@ -123,35 +122,38 @@ class CuratorTest < Minitest::Test
     assert_equal [@photo_2, @photo_3, @photo_4], @curator.photographs_by_artists_from("United States")
   end
 
-#An indirect test, further tested by subsequent interacton patterns
-  def test_loads_photographs
-    @curator.load_photographs
-    assert_equal 4, @curator.photographs.length
-    @curator.photographs.each{|photo| assert_instance_of Photograph, photo}
-  end
+  describe 'it loads the photographs' do
 
-  def test_loads_artists
-    @curator.load_artists
-    assert_equal 6, @curator.artists.length
-    @curator.artists.each{|artist| assert_instance_of Artist, artist}
-  end
+   before(:all) do
+     @curator = Curator.new
+     @curator.load_photographs
+     @curator.load_artists
+   end
 
-  def test_finds_photographs_taken_in_a_range
-    @curator.load_artists
-    @curator.load_photographs
-    ids = @curator.photographs_taken_between(1950..1965).map(&:id)
-    assert_equal true,  ids.include?('1')
-    assert_equal true,  ids.include?('4')
-    assert_equal false,  ids.include?('2')
-    assert_equal false,  ids.include?('3')
-  end
+    def test_loads_photographs
+      assert_equal 4, @curator.photographs.length
+      @curator.photographs.each{|photo| assert_instance_of Photograph, photo}
+    end
 
-  def test_returns_artists_photographs_by_age
-    @curator.load_artists
-    @curator.load_photographs
-    diane_arbus = @curator.find_artist_by_id("3")
-    expected = {44=>"Identical Twins, Roselle, New Jersey", 39=>"Child with Toy Hand Grenade in Central Park"}
-    assert_equal expected, @curator.artists_photographs_by_age(diane_arbus)
+    def test_loads_artists
+      assert_equal 6, @curator.artists.length
+      @curator.artists.each{|artist| assert_instance_of Artist, artist}
+    end
+
+    def test_finds_photographs_taken_in_a_range
+      ids = @curator.photographs_taken_between(1950..1965).map(&:id)
+      assert_equal true,  ids.include?('1')
+      assert_equal true,  ids.include?('4')
+      assert_equal false,  ids.include?('2')
+      assert_equal false,  ids.include?('3')
+    end
+
+    def test_returns_artists_photographs_by_age
+      diane_arbus = @curator.find_artist_by_id("3")
+      expected = {44=>"Identical Twins, Roselle, New Jersey", 39=>"Child with Toy Hand Grenade in Central Park"}
+      assert_equal expected, @curator.artists_photographs_by_age(diane_arbus)
+    end
+    
   end
 
 end
