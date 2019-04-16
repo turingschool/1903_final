@@ -159,4 +159,13 @@ class CuratorTest < Minitest::Test
     photos = curator.photographs_taken_between(1950..1965)
     assert photos.all? { |photo| (1950..1965) === photo.year.to_i }
   end
+
+  def test_it_can_return_a_hash_with_age_of_artist_when_photo_taken
+    curator.load_artists('./data/artists.csv')
+    curator.load_photographs('./data/photographs.csv')
+    diane_arbus = curator.find_artist_by_id("3")
+    expected = {52=>"Identical Twins, Roselle, New Jersey", 57=>"Child with Toy Hand Grenade in Central Park"}
+
+    assert_equal expected, curator.artists_photographs_by_age(diane_arbus)
+  end
 end
