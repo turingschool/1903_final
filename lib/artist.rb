@@ -13,7 +13,4 @@ class Artist
     @died = attributes[:died]
     @country = attributes[:country]
   end
-
-
-
 end
