@@ -109,4 +109,12 @@ class CuratorTest < Minitest::Test
     assert_instance_of Artist, @curator.artists.first
     assert_equal "Henri Cartier-Bresson", @curator.artists.first.name
   end
+
+  def test_it_can_find_photographs_within_a_range
+    file = "./lib/photographs.csv"
+    @curator.load_photographs(file)
+
+    assert_equal 2, @curator.photographs_taken_between(1950..1965).length
+    assert_equal "Rue Mouffetard, Paris (Boy with Bottles)", @curator.photographs_taken_between(1950..1965).first.name
+  end
 end

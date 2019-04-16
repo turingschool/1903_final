@@ -73,4 +73,12 @@ class Curator
       artists << Artist.new(info)
     end
   end
+
+  def photographs_taken_between(range)
+    photographs.find_all do |photo|
+      range.any? do |year|
+        photo.year == year
+      end
+    end
+  end
 end
