@@ -1,3 +1,5 @@
+require 'csv'
+
 class Curator
   attr_reader :photographs, :artists
 
@@ -34,6 +36,28 @@ class Curator
     artist_work_hash.select do |artist, work|
       artist.country == country
     end.values.flatten
+  end
+
+  def load_photographs(file)
+    photos = CSV.open(file, :headers => true, :header_converters => :symbol)
+    @photographs = photos.map do |photo|
+      Photograph.new(photo.to_hash)
+    end
+  end
+
+  def load_artists(file)
+    artists = CSV.open(file, :headers => true, :header_converters => :symbol)
+    @artists = artists.map do |artist|
+      Artist.new(artist.to_hash)
+    end
+  end
+
+  def photographs_taken_between(range)
+
+  end
+
+  def artists_photographs_by_age(artist)
+
   end
 
   def artist_work_hash
