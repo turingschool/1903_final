@@ -33,23 +33,17 @@ class Curator
   end
 
   def photographs_taken_by_artists_from(country)
-    artist_work_hash.select do |artist, work|
-      artist.country == country
-    end.values.flatten
+    artist_work_hash.select{|artist, work| artist.country == country}.values.flatten
   end
 
   def load_photographs(file)
     photos = CSV.open(file, :headers => true, :header_converters => :symbol)
-    @photographs = photos.map do |photo|
-      Photograph.new(photo.to_hash)
-    end
+    @photographs = photos.map{|photo| Photograph.new(photo.to_hash)}
   end
 
   def load_artists(file)
     artists = CSV.open(file, :headers => true, :header_converters => :symbol)
-    @artists = artists.map do |artist|
-      Artist.new(artist.to_hash)
-    end
+    @artists = artists.map{|artist| Artist.new(artist.to_hash)}
   end
 
   def photographs_taken_between(range)
@@ -57,24 +51,20 @@ class Curator
   end
 
   def artists_photographs_by_age(input_artist)
-    hash = Hash.new
+    age_hash = Hash.new
     artist_work_hash.each do |artist, work|
       if input_artist == artist
-        work.each do |photo|
-          age = 0
-          age = photo.year.to_i - artist.born.to_i
-          hash[age] = photo.name
-        end
+        work.each{|photo| age_hash[photo.year.to_i - artist.born.to_i] = photo.name}
       end
     end
-    hash
+    age_hash
   end
 
   def artist_work_hash
-    hash = Hash.new{|hash, key| hash[key] = []}
+    artist_hash = Hash.new{|hash, key| hash[key] = []}
     @artists.each do |artist|
-      @photographs.each{|photo| hash[artist] << photo if photo.artist_id == artist.id}
+      @photographs.each{|photo| artist_hash[artist] << photo if photo.artist_id == artist.id}
     end
-    hash
+    artist_hash
   end
 end
