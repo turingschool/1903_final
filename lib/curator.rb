@@ -33,14 +33,14 @@ class Curator
 
   def artists_with_multiple_photographs
     artists_ids = []
-    multiple_photo_artist_ids = []
+    multiple_photo_artist_id = []
     @photographs.each do |photo|
-      if artists_ids.include?(photo.artist_id)
-        multiple_photo_artist_ids << photo.artist_id
+      if artists_ids.include?(photo.artist_id) && !multiple_photo_artist_id.include?(photo.artist_id)
+        multiple_photo_artist_id << photo.artist_id
       end
       artists_ids << photo.artist_id
     end
-    multiple_photo_artist_ids.map do |id|
+    multiple_photo_artist_id.map do |id|
       @artists.find{|artist| artist.id == id}
     end
   end
@@ -66,7 +66,7 @@ class Curator
         died: artist[:died],
         country: artist[:country]
       }
-      @artists << Artist.new(attributes)
+      add_artist(Artist.new(attributes))
     end
   end
 
@@ -79,16 +79,14 @@ class Curator
         artist_id: photo[:artist_id],
         year: photo[:year]
       }
-      @photographs << Photograph.new(attributes)
+      add_photograph(Photograph.new(attributes))
     end
   end
 
   def photographs_taken_between(range)
-    photos = []
-    @photographs.each do |photo|
-      photos << photo if range.to_a.include?(photo.year.to_i)
+    @photographs.find_all do |photo|
+      range.to_a.include?(photo.year.to_i)
     end
-    photos
   end
 
   def artists_photographs_by_age(artist)
