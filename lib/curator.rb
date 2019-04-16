@@ -55,7 +55,7 @@ class Curator
   def artists_photographs_by_age(artist)
     photos = find_photographs_by_artist(artist)
     photos.reduce({}) do |acc, photo|
-      acc[Time.now.strftime("%Y").to_i - photo.year.to_i] = photo.name
+      acc[photo.year.to_i - artist.born.to_i] = photo.name
       acc
     end
   end
