@@ -1,3 +1,4 @@
+require 'csv'
 class Curator
   attr_reader :photographs, :artists
 
@@ -47,15 +48,15 @@ class Curator
   end
 
   def load_photographs(file_path)
-    File.foreach(file_path) do |line|
+    table = CSV.table(file_path)
+    table.each do |line|
       info = {
-        id: line[0],
-        name: line[1],
-        artist_id: line[2],
-        year: line[3]
+        id: line[:id],
+        name: line[:name],
+        artist_id: line[:artist_id],
+        year: line[:year]
       }
       photographs << Photograph.new(info)
     end
-    photographs.delete_at(0)
   end
 end
