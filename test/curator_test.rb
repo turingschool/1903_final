@@ -96,6 +96,7 @@ class CuratorTest < Minitest::Test
     file = "./lib/photo_file.csv"
     @curator.load_photographs(file)
 
-    assert_equal [@rue, @moonrise], @curator.photographs
+    assert_equal 2, @curator.photographs.length
+    assert_instance_of Photograph, @curator.photographs.first
   end
 end
