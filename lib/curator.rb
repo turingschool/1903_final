@@ -63,19 +63,14 @@ class Curator
     end
   end
 
-  # TO DO: refactor
   def load_artists(filepath)
     artist_data = CSV.table(filepath)
     artist_data.each do |artist_file_row|
-      attributes_hash = {
-        id: artist_file_row[:id].to_s,
-        name: artist_file_row[:name],
-        born: artist_file_row[:born].to_s,
-        died: artist_file_row[:died].to_s,
-        country: artist_file_row[:country]
-      }
-      artist_obj = Artist.new(attributes_hash)
-      add_artist(artist_obj)
+      attributes_hash = artist_data.headers.inject({}) do |attr_hash_builder, header|
+        attr_hash_builder[header] = artist_file_row[header].to_s
+        attr_hash_builder
+      end
+      add_artist(Artist.new(attributes_hash))
     end
   end
 
