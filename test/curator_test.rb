@@ -155,15 +155,57 @@ class CuratorTest < Minitest::Test
   def test_it_can_load_photographs
     assert_equal @curator.photographs, []
     @curator.load_photographs("./data/photographs.csv")
-    assert_equal @curator.photographs,
-    [@photo_1, @photo_2, @photo_3, @photo_4_alt]
+    assert_equal @curator.photographs[0].id, @photo_1.id
+    assert_equal @curator.photographs[1].id, @photo_2.id
+    assert_equal @curator.photographs[2].id, @photo_3.id
+    assert_equal @curator.photographs[3].id, @photo_4_alt.id
+    assert_equal @curator.photographs[0].name, @photo_1.name
+    assert_equal @curator.photographs[1].name, @photo_2.name
+    assert_equal @curator.photographs[2].name, @photo_3.name
+    assert_equal @curator.photographs[3].name, @photo_4_alt.name
+    assert_equal @curator.photographs[0].artist_id, @photo_1.artist_id
+    assert_equal @curator.photographs[1].artist_id, @photo_2.artist_id
+    assert_equal @curator.photographs[2].artist_id, @photo_3.artist_id
+    assert_equal @curator.photographs[3].artist_id, @photo_4_alt.artist_id
+    assert_equal @curator.photographs[0].year, @photo_1.year
+    assert_equal @curator.photographs[1].year, @photo_2.year
+    assert_equal @curator.photographs[2].year, @photo_3.year
+    assert_equal @curator.photographs[3].year, @photo_4_alt.year
   end
 
   def test_it_can_load_artists
     assert_equal @curator.artists, []
     @curator.load_artists("./data/artists.csv")
-    assert_equal @curator.artists,
-    [@artist_1, @artist_2, @artist_3, @artist_4, @artist_5, @artist_6]
+    assert_equal @curator.artists[0].id, @artist_1.id
+    assert_equal @curator.artists[1].id, @artist_2.id
+    assert_equal @curator.artists[2].id, @artist_3.id
+    assert_equal @curator.artists[3].id, @artist_4.id
+    assert_equal @curator.artists[4].id, @artist_5.id
+    assert_equal @curator.artists[5].id, @artist_6.id
+    assert_equal @curator.artists[0].name, @artist_1.name
+    assert_equal @curator.artists[1].name, @artist_2.name
+    assert_equal @curator.artists[2].name, @artist_3.name
+    assert_equal @curator.artists[3].name, @artist_4.name
+    assert_equal @curator.artists[4].name, @artist_5.name
+    assert_equal @curator.artists[5].name, @artist_6.name
+    assert_equal @curator.artists[0].born, @artist_1.born
+    assert_equal @curator.artists[1].born, @artist_2.born
+    assert_equal @curator.artists[2].born, @artist_3.born
+    assert_equal @curator.artists[3].born, @artist_4.born
+    assert_equal @curator.artists[4].born, @artist_5.born
+    assert_equal @curator.artists[5].born, @artist_6.born
+    assert_equal @curator.artists[0].died, @artist_1.died
+    assert_equal @curator.artists[1].died, @artist_2.died
+    assert_equal @curator.artists[2].died, @artist_3.died
+    assert_equal @curator.artists[3].died, @artist_4.died
+    assert_equal @curator.artists[4].died, @artist_5.died
+    assert_equal @curator.artists[5].died, @artist_6.died
+    assert_equal @curator.artists[0].country, @artist_1.country
+    assert_equal @curator.artists[1].country, @artist_2.country
+    assert_equal @curator.artists[2].country, @artist_3.country
+    assert_equal @curator.artists[3].country, @artist_4.country
+    assert_equal @curator.artists[4].country, @artist_5.country
+    assert_equal @curator.artists[5].country, @artist_6.country
   end
 
 end

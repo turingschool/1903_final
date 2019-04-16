@@ -1,3 +1,7 @@
+require "CSV"
+require "./lib/artist"
+require "./lib/photograph"
+
 class Curator
 
   attr_reader :photographs, :artists
@@ -48,10 +52,30 @@ class Curator
   end
 
   def load_photographs(filepath)
-
+    abort("File not found") if !File.readable?(filepath)
+    CSV.foreach(filepath, :headers => true, :header_converters => :symbol) do |row|
+      attributes = {
+        :id => row[:id],
+        :name => row[:name],
+        :artist_id => row[:artist_id],
+        :year => row[:year]
+      }
+      @photographs << Photograph.new(attributes)
+    end
   end
 
   def load_artists(filepath)
-
+    abort("File not found") if !File.readable?(filepath)
+    CSV.foreach(filepath, :headers => true, :header_converters => :symbol) do |row|
+      attributes = {
+        :id => row[:id],
+        :name => row[:name],
+        :born => row[:born],
+        :died => row[:died],
+        :country => row[:country]
+      }
+      @artists << Artist.new(attributes)
+    end
   end
+  
 end
