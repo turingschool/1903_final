@@ -153,25 +153,22 @@ class CuratorTest < Minitest::Test
     assert_equal [], @curator.find_photographs_by_artist(@artist_4)
   end
 
-  # def test_it_can_find_artists_with_multiple_photographs
-  #   @curator.add_artist(@artist_1)
-  #   @curator.add_artist(@artist_2)
-  #   @curator.add_artist(@artist_3)
-  #   @curator.add_artist(@artist_4)
-  #
-  #   @curator.add_photograph(@photo_1) # artist_id == "1"
-  #   @curator.add_photograph(@photo_2) # artist_id == "2"
-  #   @curator.add_photograph(@photo_3) # artist_id == "3"
-  #   @curator.add_photograph(@photo_4) # artist_id == "3"
-  #
-  #   assert_equal @artist_3, @curator.artists_with_multiple_photographs
-  # end
+  def test_it_can_find_artists_with_multiple_photographs
+    @curator.add_artist(@artist_1)
+    @curator.add_artist(@artist_2)
+    @curator.add_artist(@artist_3)
+    @curator.add_artist(@artist_4)
+
+    @curator.add_photograph(@photo_1) # artist_id == "1"
+    @curator.add_photograph(@photo_2) # artist_id == "2"
+    @curator.add_photograph(@photo_3) # artist_id == "3"
+    @curator.add_photograph(@photo_4) # artist_id == "3"
+
+    assert_equal [@artist_3], @curator.artists_with_multiple_photographs
+  end
 
 end
 
-# pry(main)> curator.artists_with_multiple_photographs
-# # => [#<Artist:0x00007fabc5ba0c70...>]
-#
 # pry(main)> curator.photographs_taken_by_artist_from("United States")
 # # => [#<Photograph:0x00007fabc6c28e58...>, #<Photograph:0x00007fabc5bb9ef0...>, #<Photograph:0x00007fabc6b931f0...>
 #
