@@ -59,4 +59,18 @@ class Curator
       photographs << Photograph.new(info)
     end
   end
+
+  def load_artists(file_path)
+    table = CSV.table(file_path)
+    table.each do |line|
+      info = {
+        id: line[:id],
+        name: line[:name],
+        born: line[:born],
+        died: line[:died],
+        country: line[:country]
+      }
+      artists << Artist.new(info)
+    end
+  end
 end
