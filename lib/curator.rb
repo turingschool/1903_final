@@ -63,7 +63,4 @@ class Curator
     end
   end
 
-
-
-
 end

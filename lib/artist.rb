@@ -1,5 +1,4 @@
 class Artist
-
   attr_reader :id,
               :name,
               :born,

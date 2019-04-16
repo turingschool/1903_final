@@ -1,5 +1,4 @@
 class Photograph
-
   attr_reader :id,
               :name,
               :artist_id,
