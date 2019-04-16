@@ -47,14 +47,14 @@ class Curator
   end
 
   def load_photographs(file_path)
-    photographs = CSV.table(file_path, force_quotes: true)
+    photographs = CSV.table(file_path)
     photographs.map do |photo_attributes|
       add_photograph(Photograph.new(photo_attributes))
     end
   end
 
   def load_artists(file_path)
-    artists = CSV.table(file_path, force_quotes: true)
+    artists = CSV.table(file_path)
     artists.map do |artist_attributes|
       add_photograph(Photograph.new(artist_attributes))
     end
