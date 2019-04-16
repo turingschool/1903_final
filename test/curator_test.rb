@@ -144,4 +144,16 @@ class CuratorTest < Minitest::Test
     assert_equal ["2004", "1984", "1971"], @curator.artists.map(&:died)
     assert_equal ["France", "United States", "United States"], @curator.artists.map(&:country)
   end
+
+  def test_photographs_taken_between_returns_ary_of_photo_objects_with_a_year_within_that_range
+    @curator.add_artist(@artist_1)
+    @curator.add_artist(@artist_2)
+    @curator.add_artist(@artist_3)
+    @curator.add_photograph(@photo_1)
+    @curator.add_photograph(@photo_2)
+    @curator.add_photograph(@photo_3)
+    @curator.add_photograph(@photo_4)
+
+    assert_equal [@photo_1], @curator.photographs_taken_between(1950..1965)
+  end
 end

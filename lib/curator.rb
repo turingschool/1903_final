@@ -80,4 +80,10 @@ class Curator
       add_artist(artist_obj)
     end
   end
+
+  def photographs_taken_between(range_of_years)
+    @photographs.find_all do |photograph_obj|
+      range_of_years.to_a.include?(photograph_obj.year.to_i)
+    end
+  end
 end
