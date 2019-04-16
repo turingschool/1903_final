@@ -65,4 +65,16 @@ class CuratorTest < Minitest::Test
 
     assert_equal [@twins, @monolith], @curator.find_photographs_by_artist(@diane)
   end
+
+  def test_it_can_find_artists_with_multiple_photographs
+    @curator.add_photograph(@rue)
+    @curator.add_photograph(@moonrise)
+    @curator.add_photograph(@twins)
+    @curator.add_photograph(@monolith)
+    @curator.add_artist(@ansel)
+    @curator.add_artist(@henri)
+    @curator.add_artist(@diane)
+
+    assert_empty [@diane], @curator.artists_with_multiple_photographs
+  end
 end
