@@ -8,8 +8,6 @@ class Curator
   def initialize
     @photographs = []
     @artists = []
-    @all_photographs = Hash.new(0)
-    @all_artists = Hash.new(0)
   end
 
   def add_photograph(photograph)
@@ -64,9 +62,8 @@ class Curator
       csv_photos[row.fields[0]] = Hash[row.headers[0..-1].zip(row.fields[0..-1])]
     end
     csv_photos.each do |photo_id, attributes|
-      @all_photographs["photo_#{photo_id}"] = Photograph.new(attributes)
+      add_photograph(Photograph.new(attributes))
     end
-    @all_photographs
   end
 
   def load_artists(file_path)
@@ -74,12 +71,16 @@ class Curator
     CSV.foreach(file_path, headers: true, :header_converters => :symbol, :converters => :all) do |row|
       csv_artists[row.fields[0]] = Hash[row.headers[0..-1].zip(row.fields[0..-1])]
     end
-    csv_artists.each do |artist_id, attributes|
-      @all_artists["artist_#{artist_id}"] = Artist.new(attributes)
+    csv_artists.each do |photo_id, attributes|
+      add_artist(Artist.new(attributes))
     end
-    @all_artists
   end
 
-  
+  def photographs_taken_between(range)
+    @photographs.find_all do |photo|
+      range.include?(photo.year)
+    end.flatten
+  end
+
 
 end

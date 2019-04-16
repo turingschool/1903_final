@@ -7,8 +7,6 @@ require 'csv'
 require 'pry'
 
 class CuratorTest < Minitest::Test
-
-
   def test_curator_exists
     curator = Curator.new
 
@@ -398,16 +396,23 @@ class CuratorTest < Minitest::Test
     assert_equal expected, actual
   end
 
-  def test_curator_can_find_photos_taken_by_artists_from_somewhere
+  def test_curator_can_find_photos_taken_between_years
     curator = Curator.new
-    # csv_reader = CsvReader.new
-
     curator.load_photographs('./data/photographs.csv')
     curator.load_artists('./data/artists.csv')
-# binding.pry
-    expected = []
-    actual = curator.photographs_taken_between(1950..1965)
+
+    expected = 2
+    actual = curator.photographs_taken_between(1950..1965).length
+    assert_equal expected, actual
+
+    expected = 1954
+    actual = curator.photographs_taken_between(1950..1965)[0].year
+    assert_equal expected, actual
+
+    expected = 1962
+    actual = curator.photographs_taken_between(1950..1965)[1].year
     assert_equal expected, actual
   end
+
 
 end
