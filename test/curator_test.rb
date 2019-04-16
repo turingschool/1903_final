@@ -99,7 +99,7 @@ class CuratorTest < Minitest::Test
     @curator.add_artist(@artist_2)
     @curator.add_artist(@artist_3)
     assert_equal @curator.find_photographs_by_artist(@artist_3),
-    [@photo3, @photo4]
+    [@photo_3, @photo_4]
   end
 
   def test_it_can_find_artists_with_multiple_photographs
@@ -122,7 +122,8 @@ class CuratorTest < Minitest::Test
     @curator.add_artist(@artist_2)
     @curator.add_artist(@artist_3)
     assert_equal @curator.photographs_taken_by_artist_from("United States"),
-    [@photo2, @photo3, @photo4]
+    [@photo_2, @photo_3, @photo_4]
+
   end
 
 end
