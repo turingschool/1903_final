@@ -134,4 +134,14 @@ class CuratorTest < Minitest::Test
     assert_equal ["1", "2", "3", "3"], @curator.photographs.map(&:artist_id)
     assert_equal ["1954", "1941", "1967", "1927"], @curator.photographs.map(&:year)
   end
+
+  def test_load_artists_makes_artist_objs_and_adds_them_to_artists_ary
+    @curator.load_artists('./data/artists.csv')
+
+    assert_equal ["1", "2", "3"], @curator.artists.map(&:id)
+    assert_equal ["Henri Cartier-Bresson", "Ansel Adams", "Diane Arbus"], @curator.artists.map(&:name)
+    assert_equal ["1908", "1902", "1923"], @curator.artists.map(&:born)
+    assert_equal ["2004", "1984", "1971"], @curator.artists.map(&:died)
+    assert_equal ["France", "United States", "United States"], @curator.artists.map(&:country)
+  end
 end

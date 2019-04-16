@@ -65,4 +65,19 @@ class Curator
       add_photograph(photograph_obj)
     end
   end
+
+  def load_artists(filepath)
+    artist_data = CSV.table(filepath)
+    artist_data.each do |artist_file_row|
+      attributes_hash = {
+        id: artist_file_row[:id].to_s,
+        name: artist_file_row[:name],
+        born: artist_file_row[:born].to_s,
+        died: artist_file_row[:died].to_s,
+        country: artist_file_row[:country]
+      }
+      artist_obj = Artist.new(attributes_hash)
+      add_artist(artist_obj)
+    end
+  end
 end
