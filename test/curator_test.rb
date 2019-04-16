@@ -117,4 +117,17 @@ class CuratorTest < Minitest::Test
     assert_equal 2, @curator.photographs_taken_between(1950..1965).length
     assert_equal "Rue Mouffetard, Paris (Boy with Bottles)", @curator.photographs_taken_between(1950..1965).first.name
   end
+
+  def test_it_can_find_photos_by_an_artist_by_their_age
+    file = "./lib/photographs.csv"
+    @curator.load_photographs(file)
+    file = "./lib/artists.csv"
+    @curator.load_artists(file)
+
+    expected = {44=>"Identical Twins, Roselle, New Jersey", 39=>"Child with Toy Hand Grenade in Central Park"}
+
+    diane_arbus = @curator.find_artist_by_id("3")
+
+    assert_equal expected, @curator.artists_photographs_by_age(diane_arbus)
+  end
 end
