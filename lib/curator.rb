@@ -29,4 +29,11 @@ class Curator
       photograph_obj.id == photograph_id
     end
   end
+
+  def find_photographs_by_artist(artist_obj)
+    artist_id = artist_obj.id
+    @photographs.find_all do |photograph_obj|
+      photograph_obj.artist_id == artist_id
+    end
+  end
 end
