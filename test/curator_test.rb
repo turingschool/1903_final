@@ -19,7 +19,7 @@ class CuratorTest < Minitest::Test
          artist_id: "2",
          year: "1941"
     })
-    @photo_3 = Photograph.new({    
+    @photo_3 = Photograph.new({
          id: "3",
          name: "Identical Twins, Roselle, New Jersey",
          artist_id: "3",
@@ -88,6 +88,41 @@ class CuratorTest < Minitest::Test
     @curator.add_artist(@artist_2)
     assert_equal @curator.find_photograph_by_id("1"), @photo_1
     assert_equal @curator.find_photograph_by_id("2"), @photo_2
+  end
+
+  def test_it_can_find_photographs_by_artist
+    @curator.add_photograph(@photo_1)
+    @curator.add_photograph(@photo_2)
+    @curator.add_photograph(@photo_3)
+    @curator.add_photograph(@photo_4)
+    @curator.add_artist(@artist_1)
+    @curator.add_artist(@artist_2)
+    @curator.add_artist(@artist_3)
+    assert_equal @curator.find_photographs_by_artist(@artist_3),
+    [@photo3, @photo4]
+  end
+
+  def test_it_can_find_artists_with_multiple_photographs
+    @curator.add_photograph(@photo_1)
+    @curator.add_photograph(@photo_2)
+    @curator.add_photograph(@photo_3)
+    @curator.add_photograph(@photo_4)
+    @curator.add_artist(@artist_1)
+    @curator.add_artist(@artist_2)
+    @curator.add_artist(@artist_3)
+    assert_equal @curator.artists_with_multiple_photographs, [@artist_3]
+  end
+
+  def test_it_can_find_photographs_by_artist_country
+    @curator.add_photograph(@photo_1)
+    @curator.add_photograph(@photo_2)
+    @curator.add_photograph(@photo_3)
+    @curator.add_photograph(@photo_4)
+    @curator.add_artist(@artist_1)
+    @curator.add_artist(@artist_2)
+    @curator.add_artist(@artist_3)
+    assert_equal @curator.photographs_taken_by_artist_from("United States"),
+    [@photo2, @photo3, @photo4]
   end
 
 end
