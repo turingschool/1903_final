@@ -182,11 +182,8 @@ class CuratorTest < Minitest::Test
 
     assert_equal expected, @curator.photographs_taken_by_artist_from("United States")
     assert_equal [], @curator.photographs_taken_by_artist_from("Argentina")
+    assert_equal [@photo_1], @curator.photographs_taken_by_artist_from("France")
+
   end
 
 end
-# pry(main)> curator.photographs_taken_by_artist_from("United States")
-# # => [#<Photograph:0x00007fabc6c28e58...>, #<Photograph:0x00007fabc5bb9ef0...>, #<Photograph:0x00007fabc6b931f0...>
-#
-# pry(main)> curator.photographs_taken_by_artist_from("Argentina")
-# # => []
