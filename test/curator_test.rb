@@ -91,4 +91,11 @@ class CuratorTest < Minitest::Test
 
     assert_empty @curator.photographs_taken_by_artists_from("Argentina")
   end
+
+  def test_it_can_load_photographs_from_a_file
+    file = "./lib/photo_file.csv"
+    @curator.load_photographs(file)
+
+    assert_equal [@rue, @moonrise], @curator.photographs
+  end
 end
