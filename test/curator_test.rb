@@ -109,7 +109,20 @@ class CuratorTest < Minitest::Test
     @curator.add_photograph(@photo_2)
     @curator.add_photograph(@photo_3)
     @curator.add_photograph(@photo_4)
-    
+
     assert_equal [@artist_3], @curator.artists_with_multiple_photographs
+  end
+
+  def test_photographs_takenby_artists_from_returns_ary_of_all_photos_taken_by_photogs_from_that_country
+    @curator.add_artist(@artist_1)
+    @curator.add_artist(@artist_2)
+    @curator.add_artist(@artist_3)
+    @curator.add_photograph(@photo_1)
+    @curator.add_photograph(@photo_2)
+    @curator.add_photograph(@photo_3)
+    @curator.add_photograph(@photo_4)
+    
+    assert_equal [@photo_2, @photo_3, @photo_4], @curator.photographs_taken_by_artists_from("United States")
+    assert_equal [], @curator.photographs_taken_by_artists_from("Argentina")
   end
 end
