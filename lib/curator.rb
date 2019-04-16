@@ -44,7 +44,7 @@ class Curator
     end
   end
 
-  def photographs_taken_by_artists_from(country_name)
+  def photographs_taken_by_artist_from(country_name)
     @photographs.find_all do |photograph_obj|
       artist_id = photograph_obj.artist_id
       artist_obj = @artists.find { |artist_obj| artist_obj.id == artist_id }
@@ -55,17 +55,15 @@ class Curator
   def load_photographs(filepath)
     photo_data = CSV.table(filepath)
     photo_data.each do |photo_file_row|
-      attributes_hash = {
-        id: photo_file_row[:id].to_s,
-        name: photo_file_row[:name],
-        artist_id: photo_file_row[:artist_id].to_s,
-        year: photo_file_row[:year].to_s
-      }
-      photograph_obj = Photograph.new(attributes_hash)
-      add_photograph(photograph_obj)
+      attributes_hash = photo_data.headers.inject({}) do |attr_hash_builder, header|
+        attr_hash_builder[header] = photo_file_row[header].to_s
+        attr_hash_builder
+      end
+      add_photograph(Photograph.new(attributes_hash))
     end
   end
 
+  # TO DO: refactor
   def load_artists(filepath)
     artist_data = CSV.table(filepath)
     artist_data.each do |artist_file_row|

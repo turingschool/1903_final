@@ -122,8 +122,8 @@ class CuratorTest < Minitest::Test
     @curator.add_photograph(@photo_3)
     @curator.add_photograph(@photo_4)
 
-    assert_equal [@photo_2, @photo_3, @photo_4], @curator.photographs_taken_by_artists_from("United States")
-    assert_equal [], @curator.photographs_taken_by_artists_from("Argentina")
+    assert_equal [@photo_2, @photo_3, @photo_4], @curator.photographs_taken_by_artist_from("United States")
+    assert_equal [], @curator.photographs_taken_by_artist_from("Argentina")
   end
 
   def test_load_photographs_makes_photograph_objs_and_adds_them_to_photographs_ary
