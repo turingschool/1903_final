@@ -45,4 +45,16 @@ class Curator
       end
     end.compact
   end
+
+  def load_photographs(file_path)
+    File.foreach(file_path) do |line|
+      info = {
+        id: line[0],
+        name: line[1],
+        artist_id: line[2],
+        year: line[3]
+      }
+      photographs << Photograph.new(info)
+    end
+  end
 end
