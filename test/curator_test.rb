@@ -140,4 +140,16 @@ class CuratorTest < Minitest::Test
 
     curator.photographs_taken_by_artist_from("Argentina")
   end
+
+  def test_it_can_load_artists_from_file
+    curator.load_artists('./data/artists.csv')
+    assert_equal 6, curator.artists.count
+    assert curator.artists.all? { |artist| artist.instance_of? Artist  }
+  end
+
+  def test_it_can_load_photographs_from_file
+    curator.load_photographs('./data/photographs.csv')
+    assert_equal 4, curator.photographs.count
+    assert curator.photographs.all? { |photo| photo.instance_of? Photograph }
+  end
 end
