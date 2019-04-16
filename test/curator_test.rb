@@ -77,4 +77,18 @@ class CuratorTest < Minitest::Test
 
     assert_equal [@diane], @curator.artists_with_multiple_photographs
   end
+
+  def test_it_can_find_photographs_taken_by_artists_from_a_specific_country
+    @curator.add_photograph(@rue)
+    @curator.add_photograph(@moonrise)
+    @curator.add_photograph(@twins)
+    @curator.add_photograph(@monolith)
+    @curator.add_artist(@ansel)
+    @curator.add_artist(@henri)
+    @curator.add_artist(@diane)
+
+    assert_equal [@moonrise, @twins, @monolith], @curator.photographs_taken_by_artists_from("United States")
+
+    assert_empty @curator.photographs_taken_by_artists_from("Argentina")
+  end
 end
