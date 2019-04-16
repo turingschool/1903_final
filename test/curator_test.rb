@@ -93,10 +93,10 @@ class CuratorTest < Minitest::Test
   end
 
   def test_it_can_load_photographs_from_a_file
-    file = "./lib/photo_file.csv"
+    file = "./lib/photographs.csv"
     @curator.load_photographs(file)
 
-    assert_equal 2, @curator.photographs.length
+    assert_equal 5, @curator.photographs.length
     assert_instance_of Photograph, @curator.photographs.first
   end
 end
