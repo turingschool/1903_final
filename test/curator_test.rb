@@ -112,17 +112,16 @@ class CuratorTest < Minitest::Test
     @curator.add_photograph(@photo_4)
     assert_equal [@artist_3], @curator.artists_with_multiple_photographs
   end
+
+  def test_it_returns_photos_taken_by_artist_from_country
+    @curator.add_artist(@artist_1)
+    @curator.add_artist(@artist_2)
+    @curator.add_artist(@artist_3)
+    @curator.add_photograph(@photo_1)
+    @curator.add_photograph(@photo_2)
+    @curator.add_photograph(@photo_3)
+    @curator.add_photograph(@photo_4)
+    assert_equal [@photo_2, @photo_3], @curator.photographs_taken_by_artist_from("United States")
+    assert_equal [], @curator.photographs_taken_by_artist_from("Argentina")
+  end
 end
-
-
-# * `artists_with_multiple_photographs` - This method returns an Array
-# of all `Artist`s who have more than one photograph
-# * `photographs_taken_by_artists_from(string)` - This method takes a String
-# epresenting a country. It returns an Array of `Photograph`s that were
-# taken by a photographer from that country.
-
-# pry(main)> curator.photographs_taken_by_artist_from("United States")
-# # => [#<Photograph:0x00007fabc6c28e58...>, #<Photograph:0x00007fabc5bb9ef0...>, #<Photograph:0x00007fabc6b931f0...>
-#
-# pry(main)> curator.photographs_taken_by_artist_from("Argentina")
-# # => []

@@ -45,4 +45,9 @@ class Curator
       end
     end
   end
+
+  def photographs_taken_by_artist_from(country)
+    #find all photos taken by artist from that country
+    artist_ids = @photographs.map { |photo| photo.artist_id }
+  end
 end
