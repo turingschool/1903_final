@@ -53,11 +53,21 @@ class Curator
   end
 
   def photographs_taken_between(range)
-
+    @photographs.select{|photo| range.member?(photo.year.to_i)}
   end
 
-  def artists_photographs_by_age(artist)
-
+  def artists_photographs_by_age(input_artist)
+    hash = Hash.new
+    artist_work_hash.each do |artist, work|
+      if input_artist == artist
+        work.each do |photo|
+          age = 0
+          age = photo.year.to_i - artist.born.to_i
+          hash[age] = photo.name
+        end
+      end
+    end
+    hash
   end
 
   def artist_work_hash
