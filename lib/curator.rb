@@ -55,9 +55,9 @@ class Curator
   def load_photographs(filepath)
     photo_data = CSV.table(filepath)
     photo_data.each do |photo_file_row|
-      attributes_hash = photo_data.headers.inject({}) do |attr_hash_builder, header|
-        attr_hash_builder[header] = photo_file_row[header].to_s
-        attr_hash_builder
+      attributes_hash = photo_data.headers.inject({}) do |attr_hash, header|
+        attr_hash[header] = photo_file_row[header].to_s
+        attr_hash
       end
       add_photograph(Photograph.new(attributes_hash))
     end
@@ -66,9 +66,9 @@ class Curator
   def load_artists(filepath)
     artist_data = CSV.table(filepath)
     artist_data.each do |artist_file_row|
-      attributes_hash = artist_data.headers.inject({}) do |attr_hash_builder, header|
-        attr_hash_builder[header] = artist_file_row[header].to_s
-        attr_hash_builder
+      attributes_hash = artist_data.headers.inject({}) do |attr_hash, header|
+        attr_hash[header] = artist_file_row[header].to_s
+        attr_hash
       end
       add_artist(Artist.new(attributes_hash))
     end
