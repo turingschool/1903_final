@@ -70,4 +70,21 @@ class Curator
       add_artist(artist)
     end
   end
+
+  def photographs_taken_between(year_range)
+    year_range = year_range.to_a
+    @photographs.each_with_object([]) do |photograph, array|
+      year_range.each do |year| 
+        array << photograph if year.to_s == photograph.year
+      end
+    end   
+  end
+
+  def artists_photographs_by_age(artist)
+    artist_photos = find_photographs_by_artist(artist)
+    artist_photos.each_with_object({}) do |photo, hash|
+      year = (photo.year.to_i - artist.born.to_i)
+      hash[year] = photo.name
+    end
+  end
 end
