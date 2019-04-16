@@ -397,4 +397,19 @@ class CuratorTest < Minitest::Test
     assert_equal expected, actual
   end
 
+  def test_curator_can_find_photos_taken_by_artists_from_somewhere
+    curator = Curator.new
+
+    curator.load_photographs('./data/photographs.csv')
+
+    curator.load_artists('./data/artists.csv')
+
+
+
+
+    expected = []
+    actual = curator.photographs_taken_between(1950..1965)
+    assert_equal expected, actual
+  end
+
 end
