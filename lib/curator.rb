@@ -31,4 +31,18 @@ class Curator
       photograph.artist_id == artist.id
     end
   end
+
+  def artists_with_multiple_photographs
+    artist_ids = @photographs.map do |photograph|
+      photograph.artist_id
+    end
+    dupl = artist_ids.find_all do |artist|
+      artist_ids.count(artist) > 1
+    end
+    @artists.find_all do |artist|
+      dupl.find do |id|
+        id == artist.id
+      end
+    end
+  end
 end

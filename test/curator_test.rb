@@ -111,7 +111,7 @@ class CuratorTest < Minitest::Test
     @curator.add_photograph(@photo_3)
     @curator.add_photograph(@photo_4)
     assert_equal [@artist_3], @curator.artists_with_multiple_photographs
-  end 
+  end
 end
 
 
@@ -121,11 +121,6 @@ end
 # epresenting a country. It returns an Array of `Photograph`s that were
 # taken by a photographer from that country.
 
-
-
-# pry(main)> curator.artists_with_multiple_photographs
-# # => [#<Artist:0x00007fabc5ba0c70...>]
-#
 # pry(main)> curator.photographs_taken_by_artist_from("United States")
 # # => [#<Photograph:0x00007fabc6c28e58...>, #<Photograph:0x00007fabc5bb9ef0...>, #<Photograph:0x00007fabc6b931f0...>
 #
