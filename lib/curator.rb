@@ -39,12 +39,16 @@ class Curator
   end
 
   def load_photographs(file_path)
-    csv_table = CSV.read(File.open(file_path), headers: true, header_converters: :symbol, converters: :numeric)
+    csv_table = CSV.read(File.open(file_path), headers: true, header_converters: :symbol)
     csv_table.each { |photo| @photographs << Photograph.new(photo.to_h) }
   end
 
   def load_artists(file_path)
-    csv_table = CSV.read(File.open(file_path), headers: true, header_converters: :symbol, converters: :numeric)
+    csv_table = CSV.read(File.open(file_path), headers: true, header_converters: :symbol)
     csv_table.each {|artist| @artists << Artist.new(artist.to_h)}
+  end
+
+  def photographs_taken_between(range)
+    @photographs.select { |photo| range === photo.year.to_i }
   end
 end
