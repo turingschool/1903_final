@@ -22,7 +22,6 @@ class CuratorTest < MiniTest::Test
   end
 
   def test_load
-    skip
     expect = {"1"=>@a1, "2"=>@a2, "3"=>@a3}
     assert_equal expect, @load.artists
     assert_equal [@p1, @p2, @p3], @load.photos
