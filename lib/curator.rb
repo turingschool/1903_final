@@ -86,4 +86,13 @@ class Curator
       range_of_years.to_a.include?(photograph_obj.year.to_i)
     end
   end
+
+  def artists_photographs_by_age(artist_obj)
+    all_artist_photos = find_photographs_by_artist(artist_obj)
+    all_artist_photos.inject({}) do |hash_builder, photograph_obj|
+      age = photograph_obj.year.to_i - artist_obj.born.to_i
+      hash_builder[age] = photograph_obj.name
+      hash_builder
+    end
+  end
 end

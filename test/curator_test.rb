@@ -156,4 +156,13 @@ class CuratorTest < Minitest::Test
 
     assert_equal [@photo_1], @curator.photographs_taken_between(1950..1965)
   end
+
+  def test_artists_photographs_by_age_returns_hash_of_artist_age_keys_and_photo_name_values
+    @curator.load_photographs('./data/photographs_amy.csv')
+    @curator.load_artists('./data/artists_amy.csv')
+
+    diane_arbus = @curator.find_artist_by_id("3")
+
+    assert_equal ({44=>"Identical Twins, Roselle, New Jersey", 39=>"Child with Toy Hand Grenade in Central Park"}), @curator.artists_photographs_by_age(diane_arbus)
+  end
 end
