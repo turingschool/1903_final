@@ -3,6 +3,7 @@ require 'minitest/pride'
 require './lib/photograph'
 require './lib/artist'
 require './lib/curator'
+require 'csv'
 require 'pry'
 
 class CuratorTest < Minitest::Test
@@ -399,14 +400,11 @@ class CuratorTest < Minitest::Test
 
   def test_curator_can_find_photos_taken_by_artists_from_somewhere
     curator = Curator.new
+    # csv_reader = CsvReader.new
 
     curator.load_photographs('./data/photographs.csv')
-
     curator.load_artists('./data/artists.csv')
-
-
-
-
+# binding.pry
     expected = []
     actual = curator.photographs_taken_between(1950..1965)
     assert_equal expected, actual

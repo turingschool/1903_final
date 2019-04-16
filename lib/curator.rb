@@ -1,11 +1,15 @@
 class Curator
 
   attr_reader :photographs,
-              :artists
+              :artists,
+              :csv_photographs,
+              :csv_artists
 
   def initialize
     @photographs = []
     @artists = []
+    @all_photographs = Hash.new(0)
+    @all_artists = Hash.new(0)
   end
 
   def add_photograph(photograph)
@@ -53,5 +57,29 @@ class Curator
       artist_ids_from.include?(photograph.artist_id)
     end
   end
+
+  def load_photographs(file_path)
+    csv_photos = Hash.new(0)
+    CSV.foreach(file_path, headers: true, :header_converters => :symbol, :converters => :all) do |row|
+      csv_photos[row.fields[0]] = Hash[row.headers[0..-1].zip(row.fields[0..-1])]
+    end
+    csv_photos.each do |photo_id, attributes|
+      @all_photographs["photo_#{photo_id}"] = Photograph.new(attributes)
+    end
+    @all_photographs
+  end
+
+  def load_artists(file_path)
+    csv_artists = Hash.new(0)
+    CSV.foreach(file_path, headers: true, :header_converters => :symbol, :converters => :all) do |row|
+      csv_artists[row.fields[0]] = Hash[row.headers[0..-1].zip(row.fields[0..-1])]
+    end
+    csv_artists.each do |artist_id, attributes|
+      @all_artists["artist_#{artist_id}"] = Artist.new(attributes)
+    end
+    @all_artists
+  end
+
+  
 
 end
