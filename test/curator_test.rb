@@ -152,4 +152,11 @@ class CuratorTest < Minitest::Test
     assert_equal 4, curator.photographs.count
     assert curator.photographs.all? { |photo| photo.instance_of? Photograph }
   end
+
+  def test_it_can_return_photos_taken_between_dates
+    curator.load_photographs('./data/photographs.csv')
+
+    photos = curator.photographs_taken_between(1950..1965)
+    assert photos.all? { |photo| (1950..1965) === photo.year.to_i }
+  end
 end
