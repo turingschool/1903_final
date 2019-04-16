@@ -101,11 +101,12 @@ class CuratorTest < Minitest::Test
     assert_equal "Rue Mouffetard, Paris (Boy with Bottles)", @curator.photographs.first.name
   end
 
-  # def test_it_can_load_artists_from_a_file
-  #   file = "./lib/artists.csv"
-  #   @curator.load_artists(file)
-  #
-  #   assert_equal 6, @curator.artists.length
-  #   assert_instance_of Artist, @curator.artists.first
-  # end
+  def test_it_can_load_artists_from_a_file
+    file = "./lib/artists.csv"
+    @curator.load_artists(file)
+
+    assert_equal 6, @curator.artists.length
+    assert_instance_of Artist, @curator.artists.first
+    assert_equal "Henri Cartier-Bresson", @curator.artists.first.name
+  end
 end
