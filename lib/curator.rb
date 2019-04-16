@@ -56,5 +56,6 @@ class Curator
       }
       photographs << Photograph.new(info)
     end
+    photographs.delete_at(0)
   end
 end
