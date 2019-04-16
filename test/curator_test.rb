@@ -7,8 +7,11 @@ class CuratorTest < Minitest::Test
     @curator = Curator.new
     @rue = Photograph.new({id: "1", name: "Rue Mouffetard, Paris (Boy with Bottles)", artist_id: "4", year: "1954"})
     @moonrise = Photograph.new({id: "2", name: "Moonrise, Hernandez", artist_id: "2", year: "1941"})
+    @twins = Photograph.new({id: "3", name: "Identical Twins, Roselle, New Jersey", artist_id: "3", year: "1967"})
+    @monolith = Photograph.new({id: "4", name: "Monolith, The Face of Half Dome", artist_id: "3", year: "1927"})
     @ansel = Artist.new({id: "2", name: "Ansel Adams", born: "1902", died: "1984", country: "United States"})
     @henri = Artist.new({id: "1", name: "Henri Cartier-Bresson", born: "1908", died: "2004", country: "France"})
+    @diane = Artist.new({id: "3", name: "Diane Arbus", born: "1923", died: "1971", country: "United States"})
   end
 
   def test_it_exists
@@ -40,7 +43,7 @@ class CuratorTest < Minitest::Test
   def test_it_can_find_a_photograph_by_id
     @curator.add_photograph(@rue)
     @curator.add_photograph(@moonrise)
-    
+
     assert_equal @rue, @curator.find_photograph_by_id("1")
   end
 
@@ -49,5 +52,17 @@ class CuratorTest < Minitest::Test
     @curator.add_artist(@henri)
 
     assert_equal @henri, @curator.find_artist_by_id("1")
+  end
+
+  def test_it_can_find_photographs_by_artist
+    @curator.add_photograph(@rue)
+    @curator.add_photograph(@moonrise)
+    @curator.add_photograph(@twins)
+    @curator.add_photograph(@monolith)
+    @curator.add_artist(@ansel)
+    @curator.add_artist(@henri)
+    @curator.add_artist(@diane)
+
+    assert_equal [@twins, @monolith], @curator.find_photographs_by_artist(@diane)
   end
 end
