@@ -78,6 +78,12 @@ class Curator
     end
   end
 
-  
+  def photographs_taken_between(range)
+    @photographs.select{|photo| range.include? photo.year.to_i}
+  end
+
+  def artists_photographs_by_age(artist)
+
+  end
 
 end
