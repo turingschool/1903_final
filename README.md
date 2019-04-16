@@ -249,10 +249,10 @@ pry(main)> curator.find_photographs_by_artist(artist_3)
 pry(main)> curator.artists_with_multiple_photographs
 # => [#<Artist:0x00007fabc5ba0c70...>]
 
-pry(main)> curator.photographs_taken_by_artist_from("United States")
+pry(main)> curator.photographs_taken_by_artists_from("United States")
 # => [#<Photograph:0x00007fabc6c28e58...>, #<Photograph:0x00007fabc5bb9ef0...>, #<Photograph:0x00007fabc6b931f0...>
 
-pry(main)> curator.photographs_taken_by_artist_from("Argentina")
+pry(main)> curator.photographs_taken_by_artists_from("Argentina")
 # => []
 ```
 
