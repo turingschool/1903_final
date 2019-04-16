@@ -34,6 +34,6 @@ class CuratorTest < Minitest::Test
     @curator.add_artist(@ansel)
     @curator.add_artist(@henri)
 
-    assert_equal [@ansel, @henri], @curstor.artists
+    assert_equal [@ansel, @henri], @curator.artists
   end
 end
