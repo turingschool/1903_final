@@ -77,5 +77,7 @@ class Curator
       @artists << Artist.new(attributes)
     end
   end
+
   
+
 end
