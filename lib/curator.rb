@@ -50,4 +50,20 @@ class Curator
     @photographs.group_by{|photograph| photograph.artist_id}
   end
 
+  def load_photographs(file)
+
+  end
+
+  def load_artists(file)
+
+  end
+
+  def photographs_taken_between(range)
+
+  end
+
+  def artists_photographs_by_age(artist)
+
+  end
+
 end
