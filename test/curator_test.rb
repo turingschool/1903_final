@@ -35,4 +35,15 @@ class CuratorTest < Minitest::Test
     })
   end
 
+  def test_it_exists
+    assert_instance_of Curator, @curator
+  end
+
+  def test_it_can_add_photographs
+    assert_equal @curator.photographs, []
+    @curator.add_photograph(@photo_1)
+    @curator.add_photograph(@photo_2)
+    assert_equal @curator.photographs, [@photo_1, @photo_2]
+  end
+
 end
