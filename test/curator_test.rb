@@ -126,6 +126,8 @@ class CuratorTest < Minitest::Test
 
     expected = {44=>"Identical Twins, Roselle, New Jersey", 39=>"Child with Toy Hand Grenade in Central Park"}
 
-    assert_equal expected, @curator.artists_photographs_by_age(@diane)
+    diane_arbus = @curator.find_artist_by_id("3")
+
+    assert_equal expected, @curator.artists_photographs_by_age(diane_arbus)
   end
 end
