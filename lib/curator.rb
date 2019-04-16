@@ -83,7 +83,13 @@ class Curator
   end
 
   def artists_photographs_by_age(artist)
-
+    photos_by_age = {}
+    @photographs.each do |photo|
+      if photo.artist_id == artist.id
+        photos_by_age[photo.year.to_i - artist.born.to_i] = photo.name
+      end
+    end
+    photos_by_age
   end
 
 end
