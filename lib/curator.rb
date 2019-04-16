@@ -1,3 +1,7 @@
+require 'csv'
+require './lib/photograph'
+require './lib/artist'
+
 class Curator
   attr_reader :photographs,
               :artists
@@ -51,5 +55,50 @@ class Curator
     end
     photos_in_origin
   end
-  
+
+  def load_artists(path)
+    artists = CSV.read(path, {headers: true, header_converters: :symbol})
+    artists.by_row.each do |artist|
+      attributes = {
+        id: artist[:id],
+        name: artist[:name],
+        born: artist[:born],
+        died: artist[:died],
+        country: artist[:country]
+      }
+      @artists << Artist.new(attributes)
+    end
+  end
+
+  def load_photographs(path)
+    photos = CSV.read(path, {headers: true, header_converters: :symbol})
+    photos.by_row.each do |photo|
+      attributes = {
+        id: photo[:id],
+        name: photo[:name],
+        artist_id: photo[:artist_id],
+        year: photo[:year]
+      }
+      @photographs << Photograph.new(attributes)
+    end
+  end
+
+  def photographs_taken_between(range)
+    photos = []
+    @photographs.each do |photo|
+      photos << photo if range.to_a.include?(photo.year.to_i)
+    end
+    photos
+  end
+
+  def artists_photographs_by_age(artist)
+    photos_by_age = {}
+    @photographs.each do |photo|
+      if photo.artist_id == artist.id
+        age = photo.year.to_i - artist.born.to_i
+        photos_by_age[age] = photo.name
+      end
+    end
+    photos_by_age
+  end
 end
