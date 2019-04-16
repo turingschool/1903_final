@@ -56,7 +56,7 @@ class Curator
         artist_id: line[:artist_id].to_s,
         year: line[:year]
       }
-      photographs << Photograph.new(info)
+      self.add_photograph(Photograph.new(info))
     end
   end
 
@@ -70,7 +70,7 @@ class Curator
         died: line[:died].to_s,
         country: line[:country].to_s
       }
-      artists << Artist.new(info)
+      self.add_artist(Artist.new(info))
     end
   end
 
