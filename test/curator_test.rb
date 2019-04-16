@@ -121,8 +121,17 @@ class CuratorTest < Minitest::Test
     @curator.add_photograph(@photo_2)
     @curator.add_photograph(@photo_3)
     @curator.add_photograph(@photo_4)
-    
+
     assert_equal [@photo_2, @photo_3, @photo_4], @curator.photographs_taken_by_artists_from("United States")
     assert_equal [], @curator.photographs_taken_by_artists_from("Argentina")
+  end
+
+  def test_load_photographs_makes_photograph_objs_and_adds_them_to_photographs_ary
+    @curator.load_photographs('./data/photographs.csv')
+
+    assert_equal ["1", "2", "3", "4"], @curator.photographs.map(&:id)
+    assert_equal ["Rue Mouffetard, Paris (Boy with Bottles)", "Moonrise, Hernandez", "Identical Twins, Roselle, New Jersey", "Monolith, The Face of Half Dome"], @curator.photographs.map(&:name)
+    assert_equal ["1", "2", "3", "3"], @curator.photographs.map(&:artist_id)
+    assert_equal ["1954", "1941", "1967", "1927"], @curator.photographs.map(&:year)
   end
 end

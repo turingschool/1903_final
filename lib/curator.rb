@@ -1,3 +1,4 @@
+require 'csv'
 require './lib/photograph'
 require './lib/artist'
 
@@ -48,6 +49,20 @@ class Curator
       artist_id = photograph_obj.artist_id
       artist_obj = @artists.find { |artist_obj| artist_obj.id == artist_id }
       artist_obj.country == country_name
+    end
+  end
+
+  def load_photographs(filepath)
+    photo_data = CSV.table(filepath)
+    photo_data.each do |photo_file_row|
+      attributes_hash = {
+        id: photo_file_row[:id].to_s,
+        name: photo_file_row[:name],
+        artist_id: photo_file_row[:artist_id].to_s,
+        year: photo_file_row[:year].to_s
+      }
+      photograph_obj = Photograph.new(attributes_hash)
+      add_photograph(photograph_obj)
     end
   end
 end
